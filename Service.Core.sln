@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service.Core", "src\Service.Core\Service.Core.csproj", "{740DF849-06AA-448E-8B09-91ECA236A051}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service.Core.Grpc", "src\Service.Core.Grpc\Service.Core.Grpc.csproj", "{A9A2F2A9-1B5B-40D1-8DD2-6C1D776FB6BC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service.Core.Domain.Models", "src\Service.Core.Domain.Models\Service.Core.Domain.Models.csproj", "{5FAB1BBA-DE6F-4189-8CF0-D4D77D9C660B}"
@@ -25,6 +27,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{740DF849-06AA-448E-8B09-91ECA236A051}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{740DF849-06AA-448E-8B09-91ECA236A051}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{740DF849-06AA-448E-8B09-91ECA236A051}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{740DF849-06AA-448E-8B09-91ECA236A051}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A9A2F2A9-1B5B-40D1-8DD2-6C1D776FB6BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A9A2F2A9-1B5B-40D1-8DD2-6C1D776FB6BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9A2F2A9-1B5B-40D1-8DD2-6C1D776FB6BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
