@@ -16,10 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Service.Core.Domain.Models\Service.Core.Domain.Models.csproj" />
-    <ProjectReference Include="..\Service.Core.Domain\Service.Core.Domain.csproj" />
-    <ProjectReference Include="..\Service.Core.Grpc\Service.Core.Grpc.csproj" />
-    <ProjectReference Include="..\Service.Core\Service.Core.csproj" />
+    <ProjectReference PrivateAssets="All" Include="..\Service.Core.Domain.Models\Service.Core.Domain.Models.csproj" />
+    <ProjectReference PrivateAssets="All" Include="..\Service.Core.Domain\Service.Core.Domain.csproj" />
+    <ProjectReference PrivateAssets="All" Include="..\Service.Core.Grpc\Service.Core.Grpc.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
