@@ -1,0 +1,2 @@
+# Service.Core
+Service.Core
