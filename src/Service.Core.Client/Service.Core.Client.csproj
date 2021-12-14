@@ -15,6 +15,13 @@
     <PackageReference Include="protobuf-net.Grpc" Version="1.0.152" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Service.Core.Domain.Models\Service.Core.Domain.Models.csproj" />
+    <ProjectReference Include="..\Service.Core.Domain\Service.Core.Domain.csproj" />
+    <ProjectReference Include="..\Service.Core.Grpc\Service.Core.Grpc.csproj" />
+    <ProjectReference Include="..\Service.Core\Service.Core.csproj" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetsForTfmSpecificBuildOutput>
       $(TargetsForTfmSpecificBuildOutput);PackReferencedProjectOutputs
