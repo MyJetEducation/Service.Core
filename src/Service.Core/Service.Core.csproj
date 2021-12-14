@@ -24,11 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Service.Core.Domain\Service.Core.Domain.csproj" />
-    <ProjectReference Include="..\Service.Core.Grpc\Service.Core.Grpc.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="Dockerfile">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
