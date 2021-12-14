@@ -8,6 +8,8 @@ namespace Service.Core.Domain
 {
 	public class HashCodeService<TData> : IHashCodeService<TData> where TData : class
 	{
+		private readonly ISystemClock _systemClock;
+
 		private const int HashLiveTimeMinutesDefault = 30;
 
 		// ReSharper disable once StaticMemberInGenericType
@@ -20,6 +22,8 @@ namespace Service.Core.Domain
 			Dictionary = new ConcurrentDictionary<string, (DateTime created, TData data)>();
 			_hashLiveTime = HashLiveTimeMinutesDefault;
 		}
+
+		public HashCodeService(ISystemClock systemClock) => _systemClock = systemClock;
 
 		public void SetTimeOut(int timeoutMinutes) => _hashLiveTime = timeoutMinutes;
 
@@ -41,15 +45,15 @@ namespace Service.Core.Domain
 
 			string hashCode = HashGenerator.New;
 
-			Dictionary.TryAdd(hashCode, (DateTime.UtcNow, data));
+			Dictionary.TryAdd(hashCode, (_systemClock.Now, data));
 
 			return hashCode;
 		}
 
-		private static void CheckHash()
+		private void CheckHash()
 		{
 			KeyValuePair<string, (DateTime created, TData data)>[] pairs = Dictionary
-				.Where(pair => pair.Value.created.AddMinutes(_hashLiveTime) > DateTime.UtcNow)
+				.Where(pair => pair.Value.created.AddMinutes(_hashLiveTime) < _systemClock.Now)
 				.ToArray();
 
 			foreach (KeyValuePair<string, (DateTime created, TData data)> pair in pairs)
