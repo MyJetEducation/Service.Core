@@ -34,7 +34,7 @@ namespace Service.Core.Domain
 			if (string.IsNullOrWhiteSpace(hashCode))
 				return null;
 
-			return Dictionary.TryGetValue(hashCode, out (DateTime created, TData data) info)
+			return Dictionary.TryRemove(hashCode, out (DateTime created, TData data) info)
 				? info.data
 				: null;
 		}

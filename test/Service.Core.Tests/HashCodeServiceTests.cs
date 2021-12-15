@@ -52,6 +52,18 @@ namespace Service.Core.Tests
 		}
 
 		[Test]
+		public void Get_should_remove_data_from_cache()
+		{
+			string hash = _hashCodeService.New(new TestDto("text"));
+
+			_hashCodeService.Get(hash);
+
+			TestDto data = _hashCodeService.Get(hash);
+
+			Assert.IsNull(data);
+		}
+
+		[Test]
 		public void New_not_return_data_by_hash_if_record_expired()
 		{
 			_hashCodeService.SetTimeOut(-1);
