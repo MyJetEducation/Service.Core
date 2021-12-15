@@ -43,7 +43,8 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
         path: ./publish-api
-        registry: docker.pkg.github.com
+#        registry: docker.pkg.github.com
+        registry: ghcr.io
         repository: ${{ secrets.ORG_NAME }}/service.core/service.core-test
         tags: latest
         build_args: app_version=service.core-test:latest,app_compilation_date=${{ steps.current-time.outputs.formattedTime }}
