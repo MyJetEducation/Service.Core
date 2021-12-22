@@ -1,5 +1,8 @@
-﻿namespace Service.Core.Domain.Models.Constants
+﻿using System.Text.Json.Serialization;
+
+namespace Service.Core.Domain.Models.Constants
 {
+	[JsonConverter(typeof (JsonStringEnumConverter))]
 	public enum Tutorial
 	{
 		None = 0,
