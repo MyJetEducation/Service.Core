@@ -1,9 +1,9 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Service.Core.Domain.Models.Constants
+namespace Service.Core.Domain.Models.Education
 {
 	[JsonConverter(typeof (JsonStringEnumConverter))]
-	public enum Tutorial
+	public enum EducationTutorial
 	{
 		None = 0,
 		PersonalFinance = 1,
