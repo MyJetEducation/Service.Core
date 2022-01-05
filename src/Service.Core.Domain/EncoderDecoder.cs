@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
+using Service.Core.Domain.Extensions;
 using Service.Core.Domain.Models;
 using SimpleTrading.Common.Helpers;
 
@@ -19,6 +20,9 @@ namespace Service.Core.Domain
 
 		public string Encode(string str)
 		{
+			if (str.IsNullOrWhiteSpace())
+				return null;
+
 			byte[] data = Encoding.UTF8.GetBytes(str);
 
 			byte[] result = AesEncodeDecode.Encode(data, _encodingKeyBytes);
@@ -28,6 +32,9 @@ namespace Service.Core.Domain
 
 		public string Decode(string str)
 		{
+			if (str.IsNullOrWhiteSpace())
+				return null;
+
 			byte[] data = str.HexStringToByteArray();
 
 			byte[] decode = AesEncodeDecode.Decode(data, _encodingKeyBytes);
@@ -37,7 +44,7 @@ namespace Service.Core.Domain
 
 		public string Hash(string str)
 		{
-			if (str == null)
+			if (str.IsNullOrWhiteSpace())
 				return null;
 
 			using var sha256 = SHA256.Create();
