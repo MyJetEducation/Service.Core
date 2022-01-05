@@ -30,5 +30,29 @@ namespace Service.Core.Tests.Extensions
 
 			Assert.IsFalse(result);
 		}
+
+		[Test]
+		public void Sum_by_time_span_return_total_value()
+		{
+			var items = new[]
+			{
+				new TestTimeSpanDto {Duration = new TimeSpan(1, 0, 5, 0, 1)},
+				new TestTimeSpanDto {Duration = new TimeSpan(2, 3, 0, 7, 2)},
+				new TestTimeSpanDto {Duration = new TimeSpan(0, 4, 6, 8, 3)}
+			};
+
+			TimeSpan result = items.Sum(dto => dto.Duration);
+
+			Assert.AreEqual(3, result.Days);
+			Assert.AreEqual(7, result.Hours);
+			Assert.AreEqual(11, result.Minutes);
+			Assert.AreEqual(15, result.Seconds);
+			Assert.AreEqual(6, result.Milliseconds);
+		}
+
+		private class TestTimeSpanDto
+		{
+			public TimeSpan Duration { get; set; }
+		}
 	}
 }
