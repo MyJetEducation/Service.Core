@@ -87,11 +87,5 @@ namespace Service.Core.Domain.Models.Education
 				}
 			}
 		};
-
-		public static (EducationTutorial Tutorial, int Unit, int Task)[] GetProjections() => Tutorials.Values
-			.SelectMany(tutorial => tutorial.Units
-				.SelectMany(unit => unit.Value.Tasks
-					.Select(task => (tutorial.Tutorial, unit.Value.Unit, task.Value.Task))))
-			.ToArray();
 	}
 }
