@@ -11,5 +11,7 @@
 		public const int NoRequestData = -3;
 
 		public const int NoResponseData = -4;
+
+		public const int NotValidEducationRequestData = -5;
 	}
 }
