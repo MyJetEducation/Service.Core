@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+    <PackageId>MyJetEducation.Service.Core.Client</PackageId>
+    <Authors>MyJetEducation</Authors>
+    <Company>MyJetEducation</Company>
+    <Product>MyJetEducation</Product>
+    <PackageProjectUrl>https://github.com/MyJetEducation/Service.Core</PackageProjectUrl>
     <RepositoryUrl>https://github.com/MyJetEducation/Service.Core</RepositoryUrl>
   </PropertyGroup>
 
