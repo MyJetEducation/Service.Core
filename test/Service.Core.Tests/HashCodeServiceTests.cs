@@ -2,8 +2,7 @@
 using System.Threading.Tasks;
 using Moq;
 using NUnit.Framework;
-using Service.Core.Domain;
-using Service.Core.Domain.Models;
+using Service.Core.Services;
 
 namespace Service.Core.Tests
 {
@@ -16,7 +15,7 @@ namespace Service.Core.Tests
 		{
 			public TestDto(string testField) => TestField = testField;
 
-			public string TestField { get; set; }
+			public string TestField { get; }
 		}
 
 		[SetUp]
@@ -78,7 +77,7 @@ namespace Service.Core.Tests
 		[Test]
 		public void Test_parallel()
 		{
-			Parallel.For(1, 3000, (i, state) =>
+			Parallel.For(1, 3000, (i, _) =>
 			{
 				var text = i.ToString();
 

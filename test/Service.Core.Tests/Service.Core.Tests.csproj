@@ -14,8 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Service.Core.Domain.Models\Service.Core.Domain.Models.csproj" />
-    <ProjectReference Include="..\..\src\Service.Core.Domain\Service.Core.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Service.Core\Service.Core.csproj" />
   </ItemGroup>
 
 </Project>

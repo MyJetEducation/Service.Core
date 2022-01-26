@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using NUnit.Framework;
-using Service.Core.Domain.Extensions;
+using Service.Core.Extensions;
 
 namespace Service.Core.Tests.Extensions
 {

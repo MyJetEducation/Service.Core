@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using Service.Core.Domain;
+using Service.Core.Services;
 
 namespace Service.Core.Tests
 {
