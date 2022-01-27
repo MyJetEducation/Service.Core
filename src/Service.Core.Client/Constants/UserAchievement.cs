@@ -1,8 +1,11 @@
-﻿namespace Service.Core.Client.Constants
+﻿using System.Text.Json.Serialization;
+
+namespace Service.Core.Client.Constants
 {
 	/// <summary>
 	///     Ачивки
 	/// </summary>
+	[JsonConverter(typeof(JsonStringEnumConverter))]
 	public enum UserAchievement
 	{
 		Starter,
