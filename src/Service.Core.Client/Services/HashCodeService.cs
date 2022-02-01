@@ -9,7 +9,7 @@ namespace Service.Core.Client.Services
 	{
 		private readonly ISystemClock _systemClock;
 
-		private const int HashLiveTimeMinutesDefault = 30;
+		private const int HashLiveTimeMinutesDefault = 10;
 
 		// ReSharper disable once StaticMemberInGenericType
 		private static int _hashLiveTime;
