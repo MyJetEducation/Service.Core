@@ -1,9 +1,12 @@
 ﻿using System;
+using System.IO;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using ProtoBuf;
 using Service.Core.Client.Extensions;
 using SimpleTrading.Common.Helpers;
-using HexConverterUtils = MyJetWallet.Sdk.Service.HexConverterUtils;
+using HexConverterUtils = Service.Core.Client.Extensions.HexConverterUtils;
 
 namespace Service.Core.Client.Services
 {
@@ -18,12 +21,40 @@ namespace Service.Core.Client.Services
 			_encodingKeyBytes = Encoding.UTF8.GetBytes(encodingKey);
 		}
 
+		public string EncodeProto(object obj)
+		{
+			try
+			{
+				using var stream = new MemoryStream();
+
+				stream.WriteByte(0); // First byte is a version contract;
+
+				Serializer.Serialize(stream, obj);
+
+				byte[] bytes = stream.ToArray();
+
+				return EncodeBytes(bytes);
+			}
+			catch (Exception ex)
+			{
+				throw new Exception($"Cannot serialize {obj.GetType().Name}: {ex.Message}", ex);
+			}
+		}
+
 		public string Encode(string str)
 		{
 			if (str.IsNullOrWhiteSpace())
 				return null;
 
 			byte[] data = Encoding.UTF8.GetBytes(str);
+
+			return EncodeBytes(data);
+		}
+
+		public string EncodeBytes(byte[] data)
+		{
+			if (data.IsNullOrEmpty())
+				return null;
 
 			byte[] result = AesEncodeDecode.Encode(data, _encodingKeyBytes);
 
@@ -35,11 +66,46 @@ namespace Service.Core.Client.Services
 			if (str.IsNullOrWhiteSpace())
 				return null;
 
+			byte[] bytes = DecodeBytes(str);
+
+			return Encoding.UTF8.GetString(bytes);
+		}
+
+		public byte[] DecodeBytes(string str)
+		{
+			if (str.IsNullOrWhiteSpace())
+				return null;
+
 			byte[] data = HexConverterUtils.HexStringToByteArray(str);
 
 			byte[] decode = AesEncodeDecode.Decode(data, _encodingKeyBytes);
 
-			return Encoding.UTF8.GetString(decode);
+			return decode;
+		}
+
+		public T DecodeProto<T>(string str) where T : class
+		{
+			byte[] data = DecodeBytes(str);
+			if (data.IsNullOrEmpty())
+				return null;
+
+			if (data[0] != 0) 
+				throw new Exception("Not supported version of Contract");
+
+			try
+			{
+				byte[] body = data.Skip(1).ToArray();
+				var mem = new MemoryStream(data.Length);
+				mem.Write(body);
+				mem.Position = 0;
+				return Serializer.Deserialize<T>(mem);
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine($"Cannot deserialize message {typeof (T).Name}. Data: '{str}'");
+
+				throw new Exception($"Cannot deserialize message {typeof (T).Name}: {ex.Message}", ex);
+			}
 		}
 
 		public string Hash(string str)
