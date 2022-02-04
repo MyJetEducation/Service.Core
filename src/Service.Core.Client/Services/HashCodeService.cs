@@ -49,7 +49,12 @@ namespace Service.Core.Client.Services
 			return hashCode;
 		}
 
-		public bool Contains(Func<TData, bool> predicate) => Dictionary.Values.Any(tuple => predicate.Invoke(tuple.data));
+		public bool Contains(Func<TData, bool> predicate)
+		{
+			CheckHash();
+
+			return Dictionary.Values.Any(tuple => predicate.Invoke(tuple.data));
+		}
 
 		private void CheckHash()
 		{
