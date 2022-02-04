@@ -37,6 +37,7 @@ namespace Service.Core.Client.Tests
 			string hash = _hashCodeService.New(new TestDto("text"));
 
 			Assert.IsNotNull(hash);
+			Assert.IsTrue(_hashCodeService.Contains(dto => dto.TestField == "text"));
 		}
 
 		[Test]
@@ -72,6 +73,7 @@ namespace Service.Core.Client.Tests
 			TestDto data = _hashCodeService.Get(hash);
 
 			Assert.IsNull(data);
+			Assert.IsFalse(_hashCodeService.Contains(dto => dto.TestField == "text"));
 		}
 
 		[Test]

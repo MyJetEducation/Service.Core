@@ -49,6 +49,8 @@ namespace Service.Core.Client.Services
 			return hashCode;
 		}
 
+		public bool Contains(Func<TData, bool> predicate) => Dictionary.Values.Any(tuple => predicate.Invoke(tuple.data));
+
 		private void CheckHash()
 		{
 			KeyValuePair<string, (DateTime created, TData data)>[] pairs = Dictionary
