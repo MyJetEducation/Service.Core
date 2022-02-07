@@ -13,5 +13,7 @@
 		public const int NoResponseData = -4;
 
 		public const int NotValidEducationRequestData = -5;
+
+		public const int InvalidTimeToken = -16;
 	}
 }
