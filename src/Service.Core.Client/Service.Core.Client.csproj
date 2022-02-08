@@ -11,9 +11,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="JetBrains.Annotations" Version="2021.3.0" />
-    <PackageReference Include="protobuf-net.Grpc.AspNetCore" Version="1.0.152" />
-    <PackageReference Include="SimpleTrading.Common" Version="1.0.32" />
+    <PackageReference PrivateAssets="All" Include="JetBrains.Annotations" Version="2021.3.0" />
+    <PackageReference PrivateAssets="All" Include="protobuf-net.Grpc.AspNetCore" Version="1.0.152" />
+    <PackageReference PrivateAssets="All" Include="SimpleTrading.Common" Version="1.0.32" />
   </ItemGroup>
 
 </Project>
