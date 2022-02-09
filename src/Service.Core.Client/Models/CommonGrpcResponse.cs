@@ -8,8 +8,8 @@ namespace Service.Core.Client.Models
 		[DataMember(Order = 1)]
 		public bool IsSuccess { get; set; }
 
-		public static CommonGrpcResponse Success => new CommonGrpcResponse {IsSuccess = true};
-		public static CommonGrpcResponse Fail => new CommonGrpcResponse();
-		public static CommonGrpcResponse Result(bool result) => new CommonGrpcResponse {IsSuccess = result};
+		public static CommonGrpcResponse Success => new() {IsSuccess = true};
+		public static CommonGrpcResponse Fail => new();
+		public static CommonGrpcResponse Result(bool result) => new() {IsSuccess = result};
 	}
 }
