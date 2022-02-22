@@ -41,6 +41,26 @@ namespace Service.Core.Client.Services
 			}
 		}
 
+		public string EncodeProtoBase64(object obj)
+		{
+			try
+			{
+				using var stream = new MemoryStream();
+
+				stream.WriteByte(0); // First byte is a version contract;
+
+				Serializer.Serialize(stream, obj);
+
+				byte[] bytes = stream.ToArray();
+
+				return EncodeBytesBase64(bytes);
+			}
+			catch (Exception ex)
+			{
+				throw new Exception($"Cannot serialize {obj.GetType().Name}: {ex.Message}", ex);
+			}
+		}
+
 		public string Encode(string str)
 		{
 			if (str.IsNullOrWhiteSpace())
@@ -49,6 +69,16 @@ namespace Service.Core.Client.Services
 			byte[] data = Encoding.UTF8.GetBytes(str);
 
 			return EncodeBytes(data);
+		}
+
+		public string EncodeBase64(string str)
+		{
+			if (str.IsNullOrWhiteSpace())
+				return null;
+
+			byte[] data = Encoding.UTF8.GetBytes(str);
+
+			return EncodeBytesBase64(data);
 		}
 
 		public string EncodeBytes(byte[] data)
@@ -61,6 +91,16 @@ namespace Service.Core.Client.Services
 			return HexConverterUtils.ToHexString(result);
 		}
 
+		public string EncodeBytesBase64(byte[] data)
+		{
+			if (data.IsNullOrEmpty())
+				return null;
+
+			byte[] result = AesEncodeDecode.Encode(data, _encodingKeyBytes);
+
+			return Convert.ToBase64String(result);
+		}
+
 		public string Decode(string str)
 		{
 			if (str.IsNullOrWhiteSpace())
@@ -71,12 +111,34 @@ namespace Service.Core.Client.Services
 			return Encoding.UTF8.GetString(bytes);
 		}
 
+		public string DecodeBase64(string str)
+		{
+			if (str.IsNullOrWhiteSpace())
+				return null;
+
+			byte[] bytes = DecodeBytesBase64(str);
+
+			return Encoding.UTF8.GetString(bytes);
+		}
+
 		public byte[] DecodeBytes(string str)
 		{
 			if (str.IsNullOrWhiteSpace())
 				return null;
 
 			byte[] data = HexConverterUtils.HexStringToByteArray(str);
+
+			byte[] decode = AesEncodeDecode.Decode(data, _encodingKeyBytes);
+
+			return decode;
+		}
+
+		public byte[] DecodeBytesBase64(string str)
+		{
+			if (str.IsNullOrWhiteSpace())
+				return null;
+
+			byte[] data = Convert.FromBase64String(str);
 
 			byte[] decode = AesEncodeDecode.Decode(data, _encodingKeyBytes);
 
@@ -105,6 +167,31 @@ namespace Service.Core.Client.Services
 				Console.WriteLine($"Cannot deserialize message {typeof (T).Name}. Data: '{str}'");
 
 				throw new Exception($"Cannot deserialize message {typeof (T).Name}: {ex.Message}", ex);
+			}
+		}
+
+		public T DecodeProtoBase64<T>(string str) where T : class
+		{
+			byte[] data = DecodeBytesBase64(str);
+			if (data.IsNullOrEmpty())
+				return null;
+
+			if (data[0] != 0)
+				throw new Exception("Not supported version of Contract");
+
+			try
+			{
+				byte[] body = data.Skip(1).ToArray();
+				var mem = new MemoryStream(data.Length);
+				mem.Write(body);
+				mem.Position = 0;
+				return Serializer.Deserialize<T>(mem);
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine($"Cannot deserialize message {typeof(T).Name}. Data: '{str}'");
+
+				throw new Exception($"Cannot deserialize message {typeof(T).Name}: {ex.Message}", ex);
 			}
 		}
 
