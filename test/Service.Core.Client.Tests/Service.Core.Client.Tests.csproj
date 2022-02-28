@@ -13,6 +13,7 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
     <PackageReference Include="SimpleTrading.Common" Version="1.0.32" />
     <PackageReference Include="protobuf-net.Grpc" Version="1.0.152" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0-preview-20220131-20" />
   </ItemGroup>
 
   <ItemGroup>
