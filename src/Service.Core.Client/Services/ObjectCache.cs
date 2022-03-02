@@ -26,7 +26,7 @@ namespace Service.Core.Client.Services
 		{
 			Clean();
 
-			Dictionary.AddOrUpdate(data, t => expire, (t, time) => expire);
+			Dictionary.AddOrUpdate(data, _ => expire, (_, _) => expire);
 		}
 
 		public void Remove(T data)
