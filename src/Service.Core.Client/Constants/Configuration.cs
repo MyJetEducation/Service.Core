@@ -2,6 +2,8 @@
 {
 	public class Configuration
 	{
+		public const string ProductName = "MyJetEducation";
+
 		public const string TelemetryPrefix = "ED-";
 	}
 }

@@ -16,4 +16,8 @@
     <PackageReference PrivateAssets="All" Include="SimpleTrading.Common" Version="1.0.32" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Helpers\" />
+  </ItemGroup>
+
 </Project>
