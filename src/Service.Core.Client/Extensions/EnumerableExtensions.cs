@@ -14,5 +14,8 @@ namespace Service.Core.Client.Extensions
 
 		public static TimeSpan Sum<TSource>(this IEnumerable<TSource> enumerable, Func<TSource, TimeSpan> selector) =>
 			enumerable.Select(selector).Aggregate(TimeSpan.Zero, (t1, t2) => t1 + t2);
+
+		public static bool ForAll<TSource>(this IEnumerable<TSource> enumerable, Func<TSource, bool> predicate) =>
+			!enumerable.IsNullOrEmpty() && enumerable.All(predicate);
 	}
 }

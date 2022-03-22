@@ -54,5 +54,37 @@ namespace Service.Core.Client.Tests.Extensions
 		{
 			public TimeSpan Duration { get; init; }
 		}
+
+		[Test]
+		public void ForAll_return_false_for_null_enumerable()
+		{
+			bool result = ((IEnumerable<string>) null).ForAll(s => s == "123");
+
+			Assert.IsFalse(result);
+		}
+
+		[Test]
+		public void ForAll_return_false_for_empty_enumerable()
+		{
+			bool result = Array.Empty<string>().ForAll(s => s == "123");
+
+			Assert.IsFalse(result);
+		}
+
+		[Test]
+		public void ForAll_return_false_for_enumerable_if_predicate_is_false()
+		{
+			bool result = new[] {"1", "2", "123"}.ForAll(s => s == "123");
+
+			Assert.IsFalse(result);
+		}
+
+		[Test]
+		public void ForAll_return_true_for_enumerable_if_predicate_is_true()
+		{
+			bool result = new[] {"12", "123", "1234"}.ForAll(s => s.Contains("2"));
+
+			Assert.IsTrue(result);
+		}
 	}
 }
