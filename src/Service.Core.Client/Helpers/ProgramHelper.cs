@@ -7,6 +7,7 @@ namespace Service.Core.Client.Helpers
 		public const string JwtSecretDefaultEnviromentVariable = "JWT_SECRET";
 		public const string JwtAudienceDefaultEnviromentVariable = "JWT_AUDIENCE";
 		public const string SettingsFileName = ".myjeteducation";
+		public const string AppNameProfix = "ED-";
 
 		public static string LoadJwtSecret(string enviromentVariable = JwtSecretDefaultEnviromentVariable)
 		{
