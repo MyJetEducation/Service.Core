@@ -8,7 +8,6 @@ namespace Service.Core.Client.Constants
 	[JsonConverter(typeof(JsonStringEnumConverter))]
 	public enum UserAchievement
 	{
-		Starter,
 		Ignition,
 		Voila,
 		Complaisance,
